@@ -16,6 +16,17 @@ export const projects = [
       "https://banking-web-app-tau.vercel.app/",
     ],
   },
+    {
+    image: "/projects-screenshort/eco-mart.png",
+    skills: ["React Js", "Redux", "Cloudinary","Express", "MonogoDB"],
+    title: "EcoMart – Sustainable E-Commerce Platform",
+    description:
+      "A modern e-commerce platform focused on sustainability, built with React and Next.js. It features a clean UI, responsive design, and seamless integration with a backend powered by Node.js and MongoDB. The platform includes user authentication, product listings, shopping cart functionality, and an admin dashboard for managing inventory.",
+    link: [
+      "https://github.com/rm-muzammil/EcoMart",
+      "https://eco-mart-pied-eight.vercel.app/",
+    ],
+  },
   {
     image: "/projects-screenshort/threads-up.png",
     skills: ["Next Js", "Shadcn", "Tailwind CSS"],
@@ -38,11 +49,5 @@ export const projects = [
       "www.google.com",
     ],
   },
-  {
-    image: "/projects-screenshort/p1.png",
-    skills: ["React Js", "Node Js", "Express Js", "Tailwind CSS"],
-    title: "E-Commerce",
-    description: "Project '1'",
-    link: ["https://www.youtube.com", "www.google.com"],
-  },
+
 ];
