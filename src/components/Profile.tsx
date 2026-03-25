@@ -9,7 +9,7 @@ export default function Profile() {
       <div className="profile-container">
         <div className="profile-bg">
           <Image
-            src="/rm.png"
+            src="/rm-muzammil.png"
             width={500}
             height={500}
             alt="Profile"
