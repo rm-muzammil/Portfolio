@@ -6,6 +6,27 @@
 // }));
 export const projects = [
   {
+    image: "/projects-screenshort/ai_resume_builder.png",
+    skills: ["Next.js 16",
+  "TypeScript",
+  "React",
+  "Tailwind CSS",
+  "Prisma ORM",
+  "PostgreSQL",
+  "JWT",
+  "Puppeteer Core",
+  "@sparticuz/chromium-min",
+  "OpenAI API",
+  "Vercel",],
+    title: "AI Resume Builder – Full-Stack Resume SaaS",
+    description:
+      "Built a full-stack AI-powered resume builder that allows users to create, edit, manage, and export professional resumes. The application includes secure JWT authentication, AI-generated professional summaries, a dashboard for managing multiple resumes, and server-side PDF export optimized for Vercel deployment.",
+    link: [
+      "https://github.com/rm-muzammil/ai-resume-builder",
+      "https://ai-resume-builder-theta-one.vercel.app/",
+    ],
+  },
+  {
     image: "/projects-screenshort/banking-web-app.png",
     skills: ["Next Js", "NextAuth", "Tailwind CSS", "MonogoDB"],
     title: "NextBank – Modern Banking Web Application",
