@@ -3,24 +3,23 @@ import TrueFocus from "./TrueFocus";
 import RotatingText from "./RotatingText";
 
 import Profile from "@/components/Profile";
-// import ProfileImage from "../components/ProfileImage";
 
 export default function About() {
   return (
     <AnimatedSection
       variants={{
-        // hidden: { opacity: 0, y: 100 },
-        // visible: { opacity: 1, y: 0 },
         hidden: { opacity: 0, scale: 0.9 },
         visible: { opacity: 1, scale: 1 },
       }}
     >
       <section
         id="about"
-        className="mt-[1rem] h-screen flex flex-wrap-reverse md:flex-nowrap justify-between mx-[1rem] md:mx-[10rem] text-white text-4xl"
+        className="mt-[1rem] min-h-screen flex flex-wrap-reverse md:flex-nowrap justify-between items-center mx-[1rem] md:mx-[6rem] lg:mx-[10rem] text-white"
       >
-        <div className=" flex flex-col justify-center md:max-w-[40rem]">
-          <h2>HI, I'm</h2>
+        {/* Left Content */}
+        <div className="flex flex-col justify-center md:max-w-[42rem]">
+          <h2 className="text-2xl md:text-4xl font-semibold">HI, I'm</h2>
+
           <div className="flex my-2">
             <TrueFocus
               sentence="RM MUZAMMIL"
@@ -31,16 +30,17 @@ export default function About() {
               pauseBetweenAnimations={1}
             />
           </div>
-          <div className="flex items-center md:w-[40rem]">
-            <h3 className="md:text-2xl text-[1rem]">I am a </h3>
+
+          <div className="flex items-center flex-wrap gap-2 md:w-[40rem]">
+            <h3 className="md:text-2xl text-[1rem]">I am a</h3>
 
             <RotatingText
               texts={[
+                "Full Stack Developer",
+                "Next.js Developer",
                 "MERN Stack Developer",
-                "Programmmer",
-                "Software Engineer",
               ]}
-              mainClassName="px-2 md:text-3xl text-[1.5rem] font-bold sm:px-2 md:px-3 text-violet-500 overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
+              mainClassName="px-2 md:text-3xl text-[1.2rem] font-bold sm:px-2 md:px-3 text-violet-500 overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
               staggerFrom={"last"}
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
@@ -48,18 +48,27 @@ export default function About() {
               staggerDuration={0.035}
               splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
               transition={{ type: "spring", damping: 90, stiffness: 1200 }}
-              rotationInterval={4000}
+              rotationInterval={3500}
             />
           </div>
-          <div className="md:text-xl text-sm">
-            I specialize in building responsive and dynamic web applications
-            using the MERN Stack (MongoDB, Express.js, React.js, Node.js). I'm
-            also skilled in Next.js, allowing me to create fast, SEO-friendly,
-            and production-ready websites.
+
+          <div className="md:text-lg text-sm leading-relaxed text-gray-300 mt-4">
+            I build modern, responsive, and high-performance web applications
+            for businesses, startups, and personal brands. My core expertise
+            includes React.js, Next.js, Node.js, Express.js, MongoDB,
+            PostgreSQL, and Prisma. I create fast, SEO-friendly, and
+            production-ready websites, dashboards, admin panels, authentication
+            systems, and full-stack web solutions.
           </div>
+
+          <p className="mt-4 text-sm md:text-lg text-violet-300 font-medium">
+            Available for freelance projects: Business Websites, Dashboards,
+            Admin Panels, and Full-Stack Web Apps.
+          </p>
         </div>
-        <div className="mt-[5rem] md:mt-[0rem] flex justify-center items-center w-full">
-          {/* <Image src="/rm.png" width={450} height={450} /> */}
+
+        {/* Right Profile */}
+        <div className="mt-[4rem] md:mt-0 flex justify-center items-center w-full">
           <Profile />
         </div>
       </section>

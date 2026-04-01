@@ -67,7 +67,7 @@ export const projects = [
       "A fully functional e-commerce platform built with modern web technologies. It features user authentication, product listings, shopping cart, order management, and an admin dashboard. The frontend is built with React and Tailwind CSS, while the backend uses Node.js, Express, and MongoDB with secure JWT authentication and role-based access control.",
     link: [
       "https://github.com/rm-muzammil/fullStack-eCommerce",
-      "www.google.com",
+      
     ],
   },
 
