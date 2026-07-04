@@ -1,86 +1,41 @@
-import {
-  SiHtml5,
-  SiCss3,
-  SiBootstrap,
-  SiTailwindcss,
-  SiJavascript,
-  SiTypescript,
-  SiReact,
-  SiNextdotjs,
-  SiMui,
-  SiAntdesign,
-  SiNodedotjs,
-  SiExpress,
-  SiMongodb,
-  SiFirebase,
-  SiPython,
-  SiCplusplus,
-  SiGit,
-  SiGithub,
-  SiVercel,
-  SiPostman,
-  SiFigma,
-  SiNetlify,
-  SiRailway,
-  SiPostgresql,
-  SiDart,
-  SiPrisma,
-} from "react-icons/si";
-export const skillsData = [
-  {
-    skill_name: "Frontend",
-    skills: [
-      { icon: <SiHtml5 size={30} color="#E34F26" />, label: "HTML" },
-      { icon: <SiCss3 size={30} color="#1572B6" />, label: "CSS" },
-      { icon: <SiBootstrap size={30} color="#7952B3" />, label: "Bootstrap" },
-      {
-        icon: <SiTailwindcss size={30} color="#38BDF8" />,
-        label: "Tailwind CSS",
-      },
-      { icon: <SiJavascript size={30} color="#F7DF1E" />, label: "JavaScript" },
-      { icon: <SiTypescript size={30} color="#3178C6" />, label: "TypeScript" },
-      { icon: <SiReact size={30} color="#61DAFB" />, label: "React.js" },
-      { icon: <SiNextdotjs size={30} color="#000000" />, label: "Next.js" },
-      { icon: <SiMui size={30} color="#0081CB" />, label: "Material UI" },
-      { icon: <SiAntdesign size={30} color="#0170FE" />, label: "Ant Design" },
-    ],
-  },
-  {
-    skill_name: "Backend & APIs",
-    skills: [
-      { icon: <SiNodedotjs size={30} color="#339933" />, label: "Node.js" },
-      { icon: <SiExpress size={30} color="#000000" />, label: "Express.js" },
-    ],
-  },
-  {
-    skill_name: "Databases & ORM",
-    skills: [
-      { icon: <SiMongodb size={30} color="#47A248" />, label: "MongoDB" },
-      { icon: <SiPostgresql size={30} color="#336791" />, label: "PostgreSQL" },
-      { icon: <SiFirebase size={30} color="#FFCA28" />, label: "Firebase" },
-      { icon: <SiPrisma size={30} color="#2D3748" />, label: "Prisma ORM" },
-    ],
-  },
-  {
-    skill_name: "Languages",
-    skills: [
-      { icon: <SiPython size={30} color="#3776AB" />, label: "Python" },
-      { icon: <SiJavascript size={30} color="#F7DF1E" />, label: "JavaScript" },
-      { icon: <SiTypescript size={30} color="#3178C6" />, label: "TypeScript" },
-      { icon: <SiCplusplus size={30} color="#00599C" />, label: "C++" },
-      { icon: <SiDart size={30} color="#0175C2" />, label: "Dart" },
-    ],
-  },
-  {
-    skill_name: "Tools & Deployment",
-    skills: [
-      { icon: <SiGit size={30} color="#F05032" />, label: "Git" },
-      { icon: <SiGithub size={30} color="#181717" />, label: "GitHub" },
-      { icon: <SiPostman size={30} color="#FF6C37" />, label: "Postman" },
-      { icon: <SiFigma size={30} color="#F24E1E" />, label: "Figma" },
-      { icon: <SiVercel size={30} color="#000000" />, label: "Vercel" },
-      { icon: <SiNetlify size={30} color="#00C7B7" />, label: "Netlify" },
-      { icon: <SiRailway size={30} color="#0B0D0E" />, label: "Railway" },
-    ],
-  },
-];
+/**
+ * skillsData.js
+ * Updated for the redesign — added `category` and `level` (0–100).
+ * Skills without `level` render as tag pills instead of bar charts.
+ * Add Docker/AWS/CI-CD levels as you actually learn them.
+ */
+
+const skillsData = [
+  // ── Frontend ──────────────────────────────────────────
+  { name: 'Next.js',        category: 'Frontend',        level: 90 },
+  { name: 'React',          category: 'Frontend',        level: 88 },
+  { name: 'TypeScript',     category: 'Frontend',        level: 80 },
+  { name: 'Tailwind CSS',   category: 'Frontend',        level: 82 },
+  { name: 'Framer Motion',  category: 'Frontend',        level: 65 },
+
+  // ── Backend & APIs ────────────────────────────────────
+  { name: 'Node.js',        category: 'Backend & APIs',  level: 78 },
+  { name: 'Express',        category: 'Backend & APIs',  level: 75 },
+  { name: 'REST APIs',      category: 'Backend & APIs',  level: 82 },
+  { name: 'NextAuth.js',    category: 'Backend & APIs',  level: 72 },
+
+  // ── Databases & ORM ───────────────────────────────────
+  { name: 'PostgreSQL',     category: 'Databases & ORM', level: 70 },
+  { name: 'MongoDB',        category: 'Databases & ORM', level: 75 },
+  { name: 'Prisma',         category: 'Databases & ORM', level: 70 },
+
+  // ── DevOps & Cloud (honest — work in progress) ────────
+  { name: 'Docker',         category: 'DevOps & Cloud',  level: 18 },
+  { name: 'AWS',            category: 'DevOps & Cloud',  level: 12 },
+  { name: 'GitHub Actions', category: 'DevOps & Cloud',  level: 30 },
+  { name: 'Vercel',         category: 'DevOps & Cloud',  level: 80 },
+
+  // ── Tools (no level → renders as tag cloud) ───────────
+  { name: 'Git',            category: 'Tools' },
+  { name: 'Figma',          category: 'Tools' },
+  { name: 'VS Code',        category: 'Tools' },
+  { name: 'Postman',        category: 'Tools' },
+  { name: 'Claude API',     category: 'Tools' },
+]
+
+export default skillsData

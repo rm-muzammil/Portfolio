@@ -1,6 +1,5 @@
 "use client";
-import Lenis from "@studio-freight/lenis";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 export default function LenisWrapper({
   children,
@@ -8,13 +7,33 @@ export default function LenisWrapper({
   children: React.ReactNode;
 }) {
   useEffect(() => {
-    const lenis = new Lenis();
-    const raf = (time: number) => {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
+    let lenis: any;
+    let rafId: number;
+
+    async function init() {
+      const { default: Lenis } = await import("lenis");
+      lenis = new Lenis({
+        duration: 0.9,
+        easing: (t: number) => 1 - Math.pow(1 - t, 3),
+        smoothWheel: true,
+        wheelMultiplier: 1,
+        touchMultiplier: 1,
+      });
+
+      function raf(time: number) {
+        lenis.raf(time);
+        rafId = requestAnimationFrame(raf);
+      }
+      rafId = requestAnimationFrame(raf);
+    }
+
+    init();
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      lenis?.destroy();
     };
-    requestAnimationFrame(raf);
-    return () => lenis.destroy();
   }, []);
+
   return <>{children}</>;
 }

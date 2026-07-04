@@ -1,0 +1,333 @@
+/* ─────────────────────────────────────────
+   Hero
+───────────────────────────────────────── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 80px;
+  padding-bottom: 4rem;
+  overflow: visible; /* let bg bleed out */
+}
+
+/* text content — left aligned, max readable width */
+.layout {
+  position: relative;
+  z-index: 2;
+  max-width: 560px;
+  width: 100%;
+}
+
+/* ─────────────────────────────────────────
+   Background blended photo
+   position: fixed so it ignores all parent
+   padding/max-width constraints
+───────────────────────────────────────── */
+.bgPhoto {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 42%;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* target the actual img Next.js renders */
+.bgPhoto img {
+  opacity: 0.45 !important;
+  filter: grayscale(25%) contrast(0.92) !important;
+  mix-blend-mode: luminosity;
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* Left fade — keeps text 100% readable */
+.bgFadeLeft {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(9,9,11,1)   0%,
+    rgba(9,9,11,0.85) 20%,
+    rgba(9,9,11,0.4)  50%,
+    rgba(9,9,11,0.05) 80%,
+    transparent       100%
+  );
+  z-index: 1;
+}
+
+/* Bottom fade — dissolves into next section */
+.bgFadeBottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 300px;
+  background: linear-gradient(to bottom, transparent, var(--bg));
+  z-index: 1;
+}
+
+/* Top fade — blends with navbar */
+.bgFadeTop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 140px;
+  background: linear-gradient(to bottom, var(--bg), transparent);
+  z-index: 1;
+}
+
+/* ─────────────────────────────────────────
+   Text content
+───────────────────────────────────────── */
+.left {
+  display: flex;
+  flex-direction: column;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--green);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1.25rem;
+  opacity: 0;
+  animation: fadeUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.1s forwards;
+}
+.eyebrowDash {
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--green);
+  flex-shrink: 0;
+}
+
+.name {
+  font-family: var(--font-display);
+  font-size: clamp(42px, 5.5vw, 68px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--text);
+  margin-bottom: 0.65rem;
+  opacity: 0;
+  animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.2s forwards;
+}
+
+.roleRow {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  margin-bottom: 1.5rem;
+  min-height: 28px;
+  opacity: 0;
+  animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.3s forwards;
+}
+.roleTyped {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  color: var(--text2);
+}
+.caret {
+  display: inline-block;
+  width: 2px;
+  height: 17px;
+  background: var(--green);
+  border-radius: 1px;
+  animation: blink 0.75s step-end infinite;
+}
+
+.pitch {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.8;
+  max-width: 460px;
+  margin-bottom: 1.75rem;
+  opacity: 0;
+  animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.35s forwards;
+}
+
+.chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.4s forwards;
+}
+.chip {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  color: var(--text2);
+  background: var(--surface);
+}
+.chipLive {
+  composes: chip;
+  border-color: rgba(110,231,183,0.3);
+  color: var(--green);
+  background: rgba(110,231,183,0.07);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.liveDot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  flex-shrink: 0;
+  animation: livePulse 2.2s ease-in-out infinite;
+}
+
+.ctas {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+  opacity: 0;
+  animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.45s forwards;
+}
+.btnPrimary {
+  background: var(--green);
+  color: #09090b;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 11px 22px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: opacity 0.2s, transform 0.15s;
+}
+.btnPrimary:hover { opacity: 0.85; transform: translateY(-1px); }
+
+.btnGhost {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--text2);
+  text-decoration: none;
+  padding: 11px 18px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  transition: border-color 0.2s, color 0.2s;
+}
+.btnGhost:hover { border-color: var(--indigo); color: var(--indigo); }
+
+.ragCard {
+  background: rgba(17,17,19,0.75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--green);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  max-width: 460px;
+  opacity: 0;
+  animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) 0.55s forwards;
+}
+.ragTop {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 7px;
+}
+.ragLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--green);
+}
+.ragText {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.65;
+}
+
+/* ─────────────────────────────────────────
+   Scroll hint
+───────────────────────────────────────── */
+.scrollHint {
+  position: absolute;
+  bottom: 2rem;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 2;
+  opacity: 0;
+  animation: fadeIn 1s ease 1.4s forwards;
+}
+.scrollLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text3);
+  letter-spacing: 0.1em;
+}
+.scrollLine {
+  width: 1px;
+  height: 40px;
+  background: var(--border2);
+  animation: growLine 2.2s ease-in-out infinite;
+}
+
+/* ─────────────────────────────────────────
+   Keyframes
+───────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn { to { opacity: 1; } }
+@keyframes blink {
+  from, to { opacity: 1; }
+  50%       { opacity: 0; }
+}
+@keyframes livePulse {
+  0%, 100% { opacity: 1;    transform: scale(1); }
+  50%       { opacity: 0.35; transform: scale(0.7); }
+}
+@keyframes growLine {
+  0%   { transform: scaleY(0); transform-origin: top; }
+  50%  { transform: scaleY(1); transform-origin: top; }
+  51%  { transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* ─────────────────────────────────────────
+   Responsive
+───────────────────────────────────────── */
+@media (max-width: 768px) {
+  .bgPhoto {
+    width: 75%;
+    opacity: 0.7;
+  }
+  .bgFadeLeft {
+    background: linear-gradient(
+      to right,
+      rgba(9,9,11,1)    0%,
+      rgba(9,9,11,0.95) 30%,
+      rgba(9,9,11,0.6)  60%,
+      transparent       100%
+    );
+  }
+}
+
+@media (max-width: 480px) {
+  .bgPhoto { display: none; }
+  .scrollHint { display: none; }
+  .pitch { font-size: 14px; }
+}

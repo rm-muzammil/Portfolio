@@ -22,6 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/ProfileImage.jsx", "src/sections/About.jsx", "src/sections/TrueFocus.jsx", "src/components/ProjectsCard.jsx", "src/sections/Projects.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/ProfileImage.jsx", "src/sections/About.jsx", "src/sections/TrueFocus.jsx", "src/components/ProjectsCard.jsx", "src/sections/Projects.tsx"],
   "exclude": ["node_modules"]
 }

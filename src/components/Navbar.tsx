@@ -1,131 +1,172 @@
-"use client";
+'use client'
 
-import { useEffect, useState } from "react";
-import Link from "next/link";
+import { useEffect, useState } from 'react'
+import Link from 'next/link'
 
-const sections = ["about", "skills", "projects", "contact"];
+const links = [
+  { label: 'about',   href: '#about'    },
+  { label: 'work',    href: '#projects' },
+  { label: 'skills',  href: '#skills'   },
+  { label: 'contact', href: '#contact'  },
+]
 
-export default function Navbar() {
-  const [activeSection, setActiveSection] = useState<string>("about");
-  const [isNavVisible, setIsNavVisible] = useState<boolean>(false);
+export function Navbar() {
+  const [scrolled, setScrolled] = useState(false)
+  const [open, setOpen]         = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + window.innerHeight / 2;
+    const handler = () => setScrolled(window.scrollY > 40)
+    window.addEventListener('scroll', handler, { passive: true })
+    return () => window.removeEventListener('scroll', handler)
+  }, [])
 
-      for (const id of sections) {
-        const el = document.getElementById(id);
-        if (el) {
-          const { offsetTop, offsetHeight } = el;
-          if (
-            scrollPosition >= offsetTop &&
-            scrollPosition < offsetTop + offsetHeight
-          ) {
-            setActiveSection(id);
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    handleScroll(); // initial check
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const scrollToSection = (id: string) => {
-    const section = document.getElementById(id);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  const handleToggle = () => {
-    setIsNavVisible((prev) => !prev);
-  };
+  // close menu on link click
+  const close = () => setOpen(false)
 
   return (
-    <div className="flex flex-col ">
-      <nav className="fixed flex justify-between items-center top-0 left-0 w-full p-4 z-50 shadow backdrop-blur-md">
-        <div className="flex justify-between md:w-full md:mx-[10rem] z-50">
+    <>
+      <header style={{
+        position: 'fixed',
+        top: 0, left: 0, right: 0,
+        zIndex: 100,
+        transition: 'background 0.3s, border-color 0.3s',
+        background: scrolled || open ? 'rgba(9,9,11,0.95)' : 'transparent',
+        backdropFilter: scrolled || open ? 'blur(12px)' : 'none',
+        borderBottom: scrolled || open ? '1px solid var(--border)' : '1px solid transparent',
+      }}>
+        <nav style={{
+          maxWidth: 1100,
+          margin: '0 auto',
+          padding: '0 2rem',
+          height: 64,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}>
+
           {/* Logo */}
-          <Link href={"/"}>
-            <div className="flex justify-center gap-[.5rem] md:text-2xl rounded-[4rem] h-[3rem] items-center  md:w-[15rem] opacity-80 cursor-pointer">
-              <p className="text-violet-500 text-4xl font-bold">{" < "}</p>
-              RM <p className="text-fuchsia-400 text-4xl font-bold">/</p>{" "}
-              MUZAMMIL
-              <p className="text-fuchsia-500 text-4xl font-bold">{" > "}</p>
-            </div>
+          <Link href="/" onClick={close} style={{ textDecoration: 'none' }}>
+            <span style={{
+              fontFamily: 'var(--font-display)',
+              fontWeight: 800,
+              fontSize: 17,
+              color: 'var(--text)',
+              letterSpacing: '-0.03em',
+            }}>
+              RM<span style={{ color: 'var(--green)' }}>.</span>Muzammil
+            </span>
           </Link>
 
-          {/* Nav Buttons */}
-          <div className="md:flex hidden justify-center gap-[2rem] z-50 rounded-[4rem] h-[3rem] w-[30rem] bg-gray-800 opacity-80 px-4">
-            {sections.map((section) => (
-              <button
-                key={section}
-                onClick={() => scrollToSection(section)}
-                className={`text-white px-4 py-1 z-50 rounded-full transition duration-300 hover:bg-violet-600 ${
-                  activeSection === section ? "bg-violet-500 font-semibold" : ""
-                }`}
+          {/* Desktop links */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '2rem',
+          }} className="nav-desktop">
+            {links.map(l => (
+              <a key={l.href} href={l.href} style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: 11,
+                letterSpacing: '0.1em',
+                color: 'var(--text2)',
+                textDecoration: 'none',
+                transition: 'color 0.2s',
+              }}
+              onMouseEnter={e => (e.currentTarget.style.color = 'var(--green)')}
+              onMouseLeave={e => (e.currentTarget.style.color = 'var(--text2)')}
               >
-                {section.charAt(0).toUpperCase() + section.slice(1)}
-              </button>
+                {l.label}
+              </a>
             ))}
           </div>
 
-          {/* Github Profile */}
-          <Link
-            className="hidden md:flex"
-            href={"https://github.com/rm-muzammil"}
-            target="_blank"
-          >
-            <div className="flex justify-center items-center rounded-[4rem] h-[3rem] w-[10rem] bg-gradient-to-bl from-violet-700 to-fuchsia-600 opacity-90 text-white font-medium hover:opacity-100 transition duration-300 cursor-pointer">
-              Github Profile
+          {/* Right side */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            {/* Available badge — hidden on very small screens */}
+            <div className="nav-badge" style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 7,
+              padding: '5px 12px',
+              border: '1px solid var(--border)',
+              borderRadius: 20,
+              background: 'var(--surface)',
+            }}>
+              <span className="live-dot" />
+              <span style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: 10,
+                color: 'var(--text2)',
+                letterSpacing: '0.06em',
+              }}>
+                available
+              </span>
             </div>
-          </Link>
-        </div>
-        <button
-          onClick={handleToggle}
-          aria-expanded={isNavVisible}
-          aria-controls="mobile-nav"
-          className="md:hidden"
-        >
-          Menu
-        </button>
-      </nav>
-      <div
-        className={`md:hidden z-50 fixed left-0 right-0 top-[5rem] w-full bg-black/80 flex flex-col gap-[2rem] py-[2rem] items-center transform transition-all duration-300 ease-in-out
-    ${
-      isNavVisible
-        ? "opacity-100 translate-y-0 pointer-events-auto"
-        : "opacity-0 -translate-y-5 pointer-events-none"
-    }`}
-      >
-        {sections.map((section) => (
-          <button
-            key={section}
-            onClick={() => {
-              scrollToSection(section);
-              setIsNavVisible(false);
-            }}
-            className={`text-white px-4 py-1 z-50 rounded-full transition duration-300 hover:bg-violet-600 ${
-              activeSection === section ? "bg-violet-500 font-semibold" : ""
-            }`}
-          >
-            {section.charAt(0).toUpperCase() + section.slice(1)}
-          </button>
-        ))}
-        <Link
-          className=""
-          href={"https://github.com/rm-muzammil"}
-          target="_blank"
-        >
-          <div className="flex justify-center items-center rounded-[4rem] h-[3rem] w-[10rem] bg-gradient-to-bl from-violet-700 to-fuchsia-600 opacity-90 text-white font-medium hover:opacity-100 transition duration-300 cursor-pointer">
-            Github Profile
+
+            {/* Hamburger — mobile only */}
+            <button
+              className="nav-hamburger"
+              onClick={() => setOpen(o => !o)}
+              aria-label={open ? 'Close menu' : 'Open menu'}
+              style={{
+                display: 'none',
+                background: 'none',
+                border: '1px solid var(--border)',
+                borderRadius: 6,
+                padding: '6px 10px',
+                cursor: 'pointer',
+                color: 'var(--text)',
+                fontFamily: 'var(--font-mono)',
+                fontSize: 13,
+                lineHeight: 1,
+              }}
+            >
+              {open ? '✕' : '☰'}
+            </button>
           </div>
-        </Link>
-      </div>
-    </div>
-  );
+
+        </nav>
+
+        {/* Mobile menu */}
+        {open && (
+          <div style={{
+            background: 'rgba(9,9,11,0.98)',
+            borderTop: '1px solid var(--border)',
+            padding: '1.5rem 2rem',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '1.25rem',
+          }}>
+            {links.map(l => (
+              <a
+                key={l.href}
+                href={l.href}
+                onClick={close}
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: 14,
+                  letterSpacing: '0.08em',
+                  color: 'var(--text2)',
+                  textDecoration: 'none',
+                  padding: '0.5rem 0',
+                  borderBottom: '1px solid var(--border)',
+                }}
+              >
+                {l.label}
+              </a>
+            ))}
+          </div>
+        )}
+      </header>
+
+      {/* Responsive styles injected globally */}
+      <style>{`
+        @media (max-width: 640px) {
+          .nav-desktop { display: none !important; }
+          .nav-hamburger { display: block !important; }
+          .nav-badge { display: none !important; }
+        }
+      `}</style>
+    </>
+  )
 }

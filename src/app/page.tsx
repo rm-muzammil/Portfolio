@@ -1,17 +1,32 @@
-import About from "@/sections/About";
-import Skills from "@/sections/Skills";
-import Projects from "@/sections/Projects";
-import Contact from "@/sections/Contact";
-import Navbar from "@/components/Navbar";
+import { Navbar }   from '@/components/Navbar'
+import { Hero }     from '@/sections/Hero'
+import { About }    from '@/sections/About'
+import { Projects } from '@/sections/Projects'
+import { Skills }   from '@/sections/Skills'
+import { Contact }  from '@/sections/Contact'
+import { Footer }   from '@/sections/Footer'
 
-export default async function Home() {
+export default function Home() {
   return (
-    <main className="space-y-0">
+    <>
       <Navbar />
-      <About />
-      <Skills />
-      <Projects />
-      <Contact />
-    </main>
-  );
+
+      {/* Hero is full-bleed — outside page-content so bg image isn't clipped */}
+      <div style={{ position: 'relative' }}>
+        <div className="page-content">
+          <Hero />
+        </div>
+      </div>
+
+      {/* Rest of sections inside the centered container */}
+      <main className="page-content">
+        <About />
+        <Projects />
+        <Skills />
+        <Contact />
+      </main>
+
+      <Footer />
+    </>
+  )
 }

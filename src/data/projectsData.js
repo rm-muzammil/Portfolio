@@ -1,74 +1,60 @@
-// export const projects = Array.from({ length: 10 }, (_, i) => ({
-//   image: "image",
-//   skills: ["s1", "s2"],
-//   title: `Project ${i + 1}`,
-//   description: `This is a description for project ${i + 1}.`,
-// }));
-export const projects = [
+/**
+ * projectsData.js
+ * Fields used by Projects.tsx:
+ *   image       — path under /public
+ *   title       — project name
+ *   description — 1–2 sentence summary
+ *   tags        — tech stack array (shown as pills)
+ *   github      — repo URL (optional)
+ *   live        — live demo URL (optional)
+ */
+
+const projectsData = [
   {
     image: "/projects-screenshort/ai_resume_builder.png",
-    skills: ["Next.js 16",
-  "TypeScript",
-  "React",
-  "Tailwind CSS",
-  "Prisma ORM",
-  "PostgreSQL",
-  "JWT",
-  "Puppeteer Core",
-  "@sparticuz/chromium-min",
-  "OpenAI API",
-  "Vercel",],
-    title: "AI Resume Builder – Full-Stack Resume SaaS",
+    title: "AI Resume Builder",
     description:
-      "Built a full-stack AI-powered resume builder that allows users to create, edit, manage, and export professional resumes. The application includes secure JWT authentication, AI-generated professional summaries, a dashboard for managing multiple resumes, and server-side PDF export optimized for Vercel deployment.",
-    link: [
-      "https://github.com/rm-muzammil/ai-resume-builder",
-      "https://ai-resume-builder-theta-one.vercel.app/",
-    ],
+      "Full-stack SaaS with JWT auth, AI-generated summaries via OpenAI, multi-resume dashboard, and server-side PDF export optimised for Vercel Edge.",
+    tags: ["Next.js 16", "TypeScript", "Prisma", "PostgreSQL", "OpenAI API", "Puppeteer"],
+    github: "https://github.com/rm-muzammil/ai-resume-builder",
+    live:   "https://ai-resume-builder-theta-one.vercel.app/",
   },
   {
     image: "/projects-screenshort/banking-web-app.png",
-    skills: ["Next Js", "NextAuth", "Tailwind CSS", "MonogoDB"],
-    title: "NextBank – Modern Banking Web Application",
+    title: "NextBank",
     description:
-      "A secure and responsive banking web application built with Next.js, MongoDB, and NextAuth, featuring JWT authentication, role-based access, and real-time transaction management.The system allows admins to manage users and perform transfers, while customers can check balances, view transaction history, and send funds securely. Designed with a clean UI for an intuitive banking experience.",
-    link: [
-      "https://github.com/rm-muzamil/Banking-Web-App",
-      "https://banking-web-app-tau.vercel.app/",
-    ],
+      "Secure banking app with JWT auth, role-based access, real-time transaction management, and a clean admin dashboard.",
+    tags: ["Next.js", "NextAuth", "MongoDB", "Tailwind CSS"],
+    github: "https://github.com/rm-muzamil/Banking-Web-App",
+    live:   "https://banking-web-app-tau.vercel.app/",
   },
-    {
+  {
     image: "/projects-screenshort/eco-mart.png",
-    skills: ["React Js", "Redux", "Cloudinary","Express", "MonogoDB"],
-    title: "EcoMart – Sustainable E-Commerce Platform",
+    title: "EcoMart",
     description:
-      "A modern e-commerce platform focused on sustainability, built with React and Next.js. It features a clean UI, responsive design, and seamless integration with a backend powered by Node.js and MongoDB. The platform includes user authentication, product listings, shopping cart functionality, and an admin dashboard for managing inventory.",
-    link: [
-      "https://github.com/rm-muzammil/EcoMart",
-      "https://eco-mart-pied-eight.vercel.app/",
-    ],
+      "Sustainable e-commerce platform with product listings, cart, user auth, and an admin dashboard for inventory management.",
+    tags: ["React", "Redux", "Express", "MongoDB", "Cloudinary"],
+    github: "https://github.com/rm-muzammil/EcoMart",
+    live:   "https://eco-mart-pied-eight.vercel.app/",
   },
   {
     image: "/projects-screenshort/threads-up.png",
-    skills: ["Next Js", "Shadcn", "Tailwind CSS"],
     title: "Threads Up",
     description:
-      "A fully responsive and user-friendly online clothing store built to provide a seamless shopping experience. The platform includes features like product browsing by category, search and filter options, shopping cart functionality, and a smooth checkout process. Designed with a clean UI and optimized for both desktop and mobile users.",
-    link: [
-      "https://github.com/rm-muzammil/ThreadsUp",
-      "https://threads-up.vercel.app/",
-    ],
+      "Responsive online clothing store with category browsing, search & filter, cart, and a smooth checkout flow.",
+    tags: ["Next.js", "Tailwind CSS", "Shadcn UI"],
+    github: "https://github.com/rm-muzammil/ThreadsUp",
+    live:   "https://threads-up.vercel.app/",
   },
   {
     image: "/projects-screenshort/project-1(e-commerce).png",
-    skills: ["React Js", "Node Js", "Express Js", "Tailwind CSS"],
     title: "E-Commerce Web App",
     description:
-      "A fully functional e-commerce platform built with modern web technologies. It features user authentication, product listings, shopping cart, order management, and an admin dashboard. The frontend is built with React and Tailwind CSS, while the backend uses Node.js, Express, and MongoDB with secure JWT authentication and role-based access control.",
-    link: [
-      "https://github.com/rm-muzammil/fullStack-eCommerce",
-      
-    ],
+      "Full-stack e-commerce platform with product listings, order management, admin dashboard, and JWT role-based access control.",
+    tags: ["React", "Node.js", "Express", "Tailwind CSS"],
+    github: "https://github.com/rm-muzammil/fullStack-eCommerce",
+    live:   null,
   },
+]
 
-];
+export default projectsData
