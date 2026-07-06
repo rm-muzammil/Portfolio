@@ -1,9 +1,11 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { useReveal } from '@/hooks/useReveal'
-import styles from './Skills.module.css'
-import skillsData from '@/data/skillsData'
+import { useReveal }    from '@/hooks/useReveal'
+import { SkillRadar }   from '@/components/SkillRadar'
+import { GitHubStats }  from '@/components/GitHubStats'
+import styles           from './Skills.module.css'
+import skillsData       from '@/data/skillsData'
 
 interface Skill {
   name:      string
@@ -49,49 +51,62 @@ export function Skills() {
         <p className="section-eyebrow">skills</p>
         <h2 className={styles.heading}>What I work with</h2>
 
-        <div ref={barsRef} className={styles.grid}>
-          {Object.entries(grouped).map(([cat, items]) => (
-            <div key={cat} className={styles.group}>
-              <h3 className={styles.groupTitle} style={{ color: ACCENT_MAP[cat] ?? 'var(--text2)' }}>
-                {cat}
-              </h3>
-              <div className={styles.items}>
-                {items.map((skill, idx) => (
-                  <div key={skill.name} className={styles.skillRow}>
-                    <div className={styles.skillMeta}>
-                      <span className={styles.skillName}>{skill.name}</span>
+        {/* Two-column: bars left, radar right */}
+        <div className={styles.topGrid}>
+          <div ref={barsRef} className={styles.barsCol}>
+            {Object.entries(grouped).map(([cat, items]) => (
+              <div key={cat} className={styles.group}>
+                <h3 className={styles.groupTitle} style={{ color: ACCENT_MAP[cat] ?? 'var(--text2)' }}>
+                  {cat}
+                </h3>
+                <div className={styles.items}>
+                  {items.map((skill, idx) => (
+                    <div key={skill.name} className={styles.skillRow}>
+                      <div className={styles.skillMeta}>
+                        <span className={styles.skillName}>{skill.name}</span>
+                        {skill.level && (
+                          <span className={styles.skillLevel}>{skill.level}%</span>
+                        )}
+                      </div>
                       {skill.level && (
-                        <span className={styles.skillLevel}>{skill.level}%</span>
+                        <div className={styles.barTrack}>
+                          <div
+                            className={styles.barFill}
+                            style={{
+                              width: animated ? `${skill.level}%` : '0%',
+                              background: ACCENT_MAP[cat] ?? 'var(--green)',
+                              transitionDelay: `${idx * 60}ms`,
+                            }}
+                          />
+                        </div>
                       )}
                     </div>
-                    {skill.level && (
-                      <div className={styles.barTrack}>
-                        <div
-                          className={styles.barFill}
-                          style={{
-                            width: animated ? `${skill.level}%` : '0%',
-                            background: ACCENT_MAP[cat] ?? 'var(--green)',
-                            transitionDelay: `${idx * 60}ms`,
-                          }}
-                        />
-                      </div>
-                    )}
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
+            ))}
+          </div>
+
+          {/* Radar chart */}
+          <div className={styles.radarCol}>
+            <SkillRadar />
+          </div>
+        </div>
+
+        {/* Tag cloud */}
+        <div className={styles.cloud}>
+          {(skillsData as Skill[]).filter(s => !s.level).map(s => (
+            <span key={s.name} className="tag" style={{ fontSize: 12, padding: '5px 12px' }}>
+              {s.name}
+            </span>
           ))}
         </div>
 
-        <div className={styles.cloud}>
-          {(skillsData as Skill[])
-            .filter(s => !s.level)
-            .map(s => (
-              <span key={s.name} className="tag" style={{ fontSize: 12, padding: '5px 12px' }}>
-                {s.name}
-              </span>
-            ))}
+        {/* GitHub live stats */}
+        <div style={{ marginTop: '3rem' }}>
+          <GitHubStats />
         </div>
+
       </div>
     </section>
   )

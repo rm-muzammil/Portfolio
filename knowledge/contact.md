@@ -1,7 +1,7 @@
 # Contact & Availability
 
 ## How to reach me
-- **Email:** rmmuzammil.dev@gmail.com
+- **Email:** rmmuzamilofficial@gmail.com
 - **GitHub:** https://github.com/rm-muzammil
 - **Portfolio:** https://portfolio-1leo.vercel.app
 

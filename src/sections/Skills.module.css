@@ -7,13 +7,27 @@
   margin-bottom: 3rem;
 }
 
-.grid {
+/* two-column layout: bars + radar */
+.topGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: 1fr 300px;
+  gap: 2rem;
+  align-items: start;
   margin-bottom: 2rem;
 }
 
+.barsCol {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+
+.radarCol {
+  position: sticky;
+  top: 100px;
+}
+
+/* skill group card */
 .group {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -77,4 +91,16 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+}
+
+/* responsive */
+@media (max-width: 900px) {
+  .topGrid {
+    grid-template-columns: 1fr;
+  }
+  .radarCol {
+    position: static;
+    display: flex;
+    justify-content: center;
+  }
 }
