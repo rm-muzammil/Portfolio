@@ -99,8 +99,10 @@ export async function POST(req: NextRequest) {
       },
     })
 
-  } catch (err: any) {
-    console.error('[chat] error:', err)
-    return NextResponse.json({ error: 'Something went wrong. Please try again.' }, { status: 500 })
-  }
+  } catch (err: unknown) {
+  const message =
+    err instanceof Error ? err.message : "Unknown error";
+
+  return Response.json({ error: message }, { status: 500 });
+}
 }

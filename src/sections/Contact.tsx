@@ -23,13 +23,13 @@ export function Contact() {
 
         <div className={styles.inner}>
           <h2 className={styles.heading}>
-            Let's build something<br />
+            Let&apos;s build something<br />
             <span style={{ color: 'var(--green)' }}>together.</span>
           </h2>
 
           <p className={styles.sub}>
-            I'm currently open to freelance projects and full-time opportunities.
-            Whether you have a project, an opportunity, or just want to talk tech — I'm all ears.
+            I&apos;m currently open to freelance projects and full-time opportunities.
+           Whether you have a project, an opportunity, or just want to talk tech — I&apos;m all ears.
           </p>
 
           {/* Email */}

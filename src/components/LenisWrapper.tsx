@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect} from "react";
+import Lenis from "lenis";
 
 export default function LenisWrapper({
   children,
@@ -7,7 +8,7 @@ export default function LenisWrapper({
   children: React.ReactNode;
 }) {
   useEffect(() => {
-    let lenis: any;
+    let lenis: Lenis | null = null;
     let rafId: number;
 
     async function init() {
@@ -21,7 +22,7 @@ export default function LenisWrapper({
       });
 
       function raf(time: number) {
-        lenis.raf(time);
+        lenis?.raf(time);
         rafId = requestAnimationFrame(raf);
       }
       rafId = requestAnimationFrame(raf);

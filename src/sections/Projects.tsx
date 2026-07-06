@@ -3,23 +3,29 @@
 import { useReveal } from '@/hooks/useReveal'
 import Image from 'next/image'
 import styles from './Projects.module.css'
-
-// Matches your existing /src/data/projectsData.js shape
-// { title, description, image, tags, github, live }
 import projectsData from '@/data/projectsData'
 
+interface Project {
+  image:       string
+  title:       string
+  description: string
+  tags:        string[]
+  github?:     string
+  live?:       string | null
+}
+
 export function Projects() {
-  const ref = useReveal()
-  const featured = projectsData[0]
-  const rest     = projectsData.slice(1)
+  const ref      = useReveal()
+  const projects = projectsData as Project[]
+  const featured = projects[0]
+  const rest      = projects.slice(1)
 
   return (
     <section id="projects" className={`section ${styles.projects}`}>
       <div ref={ref} className="reveal">
         <p className="section-eyebrow">selected work</p>
-        <h2 className={styles.heading}>Things I've built</h2>
+        <h2 className={styles.heading}>Things I&apos;ve built</h2>
 
-        {/* Featured */}
         {featured && (
           <div className={styles.featured}>
             <div className={styles.featuredImg}>
@@ -33,13 +39,13 @@ export function Projects() {
               <div className={styles.imgOverlay} />
             </div>
             <div className={styles.featuredInfo}>
-              <span className={`tag tag-green`} style={{ marginBottom: 12, display: 'inline-block' }}>
+              <span className="tag tag-green" style={{ marginBottom: 12, display: 'inline-block' }}>
                 featured project
               </span>
               <h3 className={styles.projTitle}>{featured.title}</h3>
               <p className={styles.projDesc}>{featured.description}</p>
               <div className={styles.tagRow}>
-                {featured.tags?.map((t: string) => (
+                {featured.tags.map(t => (
                   <span key={t} className="tag">{t}</span>
                 ))}
               </div>
@@ -59,9 +65,8 @@ export function Projects() {
           </div>
         )}
 
-        {/* Grid */}
         <div className={styles.grid}>
-          {rest.map((p: typeof projectsData[0], i: number) => (
+          {rest.map((p, i) => (
             <div key={i} className={styles.card}>
               <div className={styles.cardImg}>
                 <Image
@@ -77,7 +82,7 @@ export function Projects() {
                 <h3 className={styles.cardTitle}>{p.title}</h3>
                 <p className={styles.cardDesc}>{p.description}</p>
                 <div className={styles.tagRow} style={{ marginTop: 'auto', paddingTop: 10 }}>
-                  {p.tags?.slice(0, 3).map((t: string) => (
+                  {p.tags.slice(0, 3).map(t => (
                     <span key={t} className="tag">{t}</span>
                   ))}
                 </div>
@@ -97,7 +102,6 @@ export function Projects() {
             </div>
           ))}
         </div>
-
       </div>
     </section>
   )

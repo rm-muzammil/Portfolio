@@ -70,8 +70,10 @@ export async function POST(req: NextRequest) {
       chunks: totalChunks,
     })
 
-  } catch (err: any) {
-    console.error('[embed] error:', err)
-    return NextResponse.json({ error: err.message }, { status: 500 })
-  }
+  } catch (err: unknown) {
+  const message =
+    err instanceof Error ? err.message : "Unknown error";
+
+  return Response.json({ error: message }, { status: 500 });
+}
 }

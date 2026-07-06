@@ -3,25 +3,27 @@
 import { useEffect, useRef, useState } from 'react'
 import { useReveal } from '@/hooks/useReveal'
 import styles from './Skills.module.css'
-
-// Extend your existing skillsData to include `level` (0-100) and `category`
-// If your current data doesn't have these, we fall back gracefully
 import skillsData from '@/data/skillsData'
 
-const CATEGORY_ORDER = ['Frontend', 'Backend & APIs', 'Databases & ORM', 'DevOps & Cloud', 'Languages', 'Tools']
+interface Skill {
+  name:      string
+  category?: string
+  level?:    number
+}
+
+const CATEGORY_ORDER = ['Frontend', 'Backend & APIs', 'Databases & ORM', 'DevOps & Cloud', 'Tools']
 
 const ACCENT_MAP: Record<string, string> = {
   'Frontend':        'var(--green)',
   'Backend & APIs':  'var(--indigo)',
   'Databases & ORM': 'var(--orange)',
   'DevOps & Cloud':  'var(--orange)',
-  'Languages':       'var(--indigo)',
   'Tools':           'var(--text3)',
 }
 
 export function Skills() {
-  const ref       = useReveal()
-  const barsRef   = useRef<HTMLDivElement>(null)
+  const ref     = useReveal()
+  const barsRef = useRef<HTMLDivElement>(null)
   const [animated, setAnimated] = useState(false)
 
   useEffect(() => {
@@ -35,9 +37,8 @@ export function Skills() {
     return () => obs.disconnect()
   }, [])
 
-  // Group skills by category
-  const grouped = CATEGORY_ORDER.reduce<Record<string, typeof skillsData>>((acc, cat) => {
-    const items = skillsData.filter((s: any) => (s.category || 'Tools') === cat)
+  const grouped = CATEGORY_ORDER.reduce<Record<string, Skill[]>>((acc, cat) => {
+    const items = (skillsData as Skill[]).filter(s => (s.category ?? 'Tools') === cat)
     if (items.length) acc[cat] = items
     return acc
   }, {})
@@ -55,7 +56,7 @@ export function Skills() {
                 {cat}
               </h3>
               <div className={styles.items}>
-                {(items as any[]).map((skill: any) => (
+                {items.map((skill, idx) => (
                   <div key={skill.name} className={styles.skillRow}>
                     <div className={styles.skillMeta}>
                       <span className={styles.skillName}>{skill.name}</span>
@@ -70,7 +71,7 @@ export function Skills() {
                           style={{
                             width: animated ? `${skill.level}%` : '0%',
                             background: ACCENT_MAP[cat] ?? 'var(--green)',
-                            transitionDelay: `${(items as any[]).indexOf(skill) * 60}ms`,
+                            transitionDelay: `${idx * 60}ms`,
                           }}
                         />
                       </div>
@@ -82,17 +83,15 @@ export function Skills() {
           ))}
         </div>
 
-        {/* Tech cloud — fallback for skills without levels */}
         <div className={styles.cloud}>
-          {skillsData
-            .filter((s: any) => !s.level)
-            .map((s: any) => (
+          {(skillsData as Skill[])
+            .filter(s => !s.level)
+            .map(s => (
               <span key={s.name} className="tag" style={{ fontSize: 12, padding: '5px 12px' }}>
                 {s.name}
               </span>
             ))}
         </div>
-
       </div>
     </section>
   )
