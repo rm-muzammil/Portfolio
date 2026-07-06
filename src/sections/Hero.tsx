@@ -78,16 +78,6 @@ export function Hero() {
             </a>
           </div>
 
-          <div className={styles.ragCard}>
-            <div className={styles.ragTop}>
-              <span className={styles.liveDot} aria-hidden="true" />
-              <span className={styles.ragLabel}>AI Portfolio · Coming soon</span>
-            </div>
-            <p className={styles.ragText}>
-              Ask this portfolio anything — it answers from my actual projects,
-              skills, and GitHub activity. Built with RAG + Claude API.
-            </p>
-          </div>
 
         </div>
 

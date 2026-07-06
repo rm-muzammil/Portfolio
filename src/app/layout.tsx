@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
-import '@/app/globals.css'
-import LenisWrapper from '@/components/LenisWrapper'
-import { Cursor }   from '@/components/Cursor'
-import { RagChat }  from '@/components/RagChat'
+import './globals.css'
+import LenisWrapper        from '@/components/LenisWrapper'
+import { Cursor }          from '@/components/Cursor'
+import { RagChat }         from '@/components/RagChat'
+import { SocialSidebar }   from '@/components/SocialSidebar'
 
 export const metadata: Metadata = {
   title: 'RM Muzammil — Full Stack Developer',
@@ -29,7 +30,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <LenisWrapper>
           {children}
         </LenisWrapper>
-        {/* RAG chat floats above everything */}
+        <SocialSidebar />
         <RagChat />
       </body>
     </html>

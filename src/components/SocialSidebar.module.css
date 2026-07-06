@@ -1,0 +1,86 @@
+/* ── Desktop sidebar ── */
+.sidebar {
+  position: fixed;
+  left: 2.5rem;
+  bottom: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: var(--radius-sm);
+  color: var(--text3);
+  text-decoration: none;
+  transition: color 0.2s, transform 0.15s, background 0.2s;
+}
+.link:hover {
+  color: var(--green);
+  transform: translateY(-2px);
+  background: var(--surface);
+}
+
+.line {
+  width: 1px;
+  height: 10rem;
+  background: var(--border2);
+}
+
+/* ── Mobile bottom bar ── */
+.mobileBar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: rgba(9,9,11,0.95);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border);
+  padding: 10px 2rem;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.mobileLink {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  color: var(--text3);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.mobileLink:hover { color: var(--green); }
+
+.mobileLinkLabel {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .mobileBar { display: flex; }
+}
+
+/* hide on very small if RAG chat button overlaps */
+@media (max-width: 380px) {
+  .mobileBar { display: none; }
+}
