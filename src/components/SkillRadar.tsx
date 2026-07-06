@@ -18,30 +18,9 @@ const SKILLS: RadarSkill[] = [
   { label: 'Tools',      value: 80, color: '#818cf8' },
 ]
 
-const SIZE    = 260
-const CX      = SIZE / 2
-const CY      = SIZE / 2
-const RADIUS  = 95
-const LEVELS  = 4
-
-function polarToCart(angle: number, r: number) {
-  const rad = (angle - 90) * (Math.PI / 180)
-  return {
-    x: CX + r * Math.cos(rad),
-    y: CY + r * Math.sin(rad),
-  }
-}
-
-function skillsToPath(skills: RadarSkill[], animated: boolean) {
-  return skills
-    .map((s, i) => {
-      const angle = (360 / skills.length) * i
-      const r     = animated ? (s.value / 100) * RADIUS : 0
-      const { x, y } = polarToCart(angle, r)
-      return `${i === 0 ? 'M' : 'L'}${x.toFixed(2)},${y.toFixed(2)}`
-    })
-    .join(' ') + 'Z'
-}
+const SIZE   = 260
+const RADIUS = 95
+const LEVELS = 4
 
 interface Props {
   compact?: boolean
@@ -128,8 +107,8 @@ export function SkillRadar({ compact = false }: Props) {
 
         {/* Skill dots */}
         {SKILLS.map((s, i) => {
-          const angle   = (360 / n) * i
-          const r       = animated ? (s.value / 100) * radius : 0
+          const angle    = (360 / n) * i
+          const r        = animated ? (s.value / 100) * radius : 0
           const { x, y } = pt(angle, r)
           return (
             <circle

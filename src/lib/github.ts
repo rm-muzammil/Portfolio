@@ -6,6 +6,21 @@ const headers: Record<string, string> = {
   ...(GITHUB_TOKEN ? { 'Authorization': `Bearer ${GITHUB_TOKEN}` } : {}),
 }
 
+interface GitHubRepo {
+  id: number
+  name: string
+  full_name: string
+  html_url: string
+  description: string | null
+  language: string | null
+  stargazers_count: number
+  forks_count: number
+  updated_at: string
+  fork: boolean
+  archived: boolean
+  size: number
+}
+
 export interface GitHubStats {
   username:     string
   avatarUrl:    string
@@ -38,7 +53,7 @@ export async function getGitHubStats(): Promise<GitHubStats> {
     `https://api.github.com/users/${USERNAME}/repos?per_page=100&sort=updated`,
     { headers, next: { revalidate: 3600 } }
   )
-  const repos: any[] = await reposRes.json()
+  const repos: GitHubRepo[] = await reposRes.json()
 
   if (!Array.isArray(repos)) {
     throw new Error('GitHub API error — check token')
@@ -49,7 +64,7 @@ export async function getGitHubStats(): Promise<GitHubStats> {
   await Promise.all(
     repos.slice(0, 10).map(async (repo) => {
       try {
-        const res  = await fetch(repo.languages_url, { headers, next: { revalidate: 3600 } })
+        const res  = await fetch(repo.language?.toLowerCase() ?? '', { headers, next: { revalidate: 3600 } })
         const data = await res.json()
         Object.entries(data).forEach(([lang, bytes]) => {
           langBytes[lang] = (langBytes[lang] ?? 0) + (bytes as number)
